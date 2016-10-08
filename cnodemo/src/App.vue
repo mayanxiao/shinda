@@ -1,24 +1,21 @@
 <template>
-  <div id="app">
+  <div>
     <top></top>
-    
+    <list></list>
 
   </div>
 </template>
 
 <script>
-// import Hello from './components/Hello.vue'
 
-// export default {
-//   components: {
-//     Hello
-//   }
-// }
 import top from './components/top.vue'
-
+import list from './components/list.vue'
+import footer from './components/footer.vue'
+import sidebar from './components/sidebar.vue'
 export default {
   components: {
-    top
+    top,
+    list
   }
 }
 </script>
@@ -35,7 +32,7 @@ html {
 }
 body {
   display: flex;
-  justify-content: center;
+  /*justify-content: center;*/
   height: 100%;
   width: 100%;
   background-color: #ccc;

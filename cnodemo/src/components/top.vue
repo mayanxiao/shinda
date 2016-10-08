@@ -25,7 +25,7 @@ export default {
       msg_d: '关于',
       msg_e: '注册',
       msg_f: '登陆',
-      msg_img: 'C:/Users/Administrator/Desktop/cnodemo/src/assets/cnodejs_light.svg'
+      msg_img: '../assets/cnodejs_light.svg'
     }
   },
   methods () {
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 .fl {float: left;}
 .fr {float: right;}
 .nav_bar {height: 50px; width: 1920px; background-color: #444; font-size: 13px; padding: 5px 0;}
