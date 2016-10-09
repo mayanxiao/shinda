@@ -38,7 +38,7 @@ export default {
 <style scoped>
 .fl {float: left;}
 .fr {float: right;}
-.nav_bar {height: 50px; width: 1920px; background-color: #444; font-size: 13px; padding: 5px 0;}
+.nav_bar {height: 50px; width: 1900px; background-color: #444; font-size: 13px; padding: 5px 0;}
 .nav_inner {width: 1400px; height: 50px; margin: 0 auto;}
 .logo_bar {padding: 3px 20px 3px 0; float: left; width: 140px; height: 22px;}
 .nav_bar .nav_search {margin-top: 16px; float: left;}

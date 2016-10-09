@@ -2,12 +2,8 @@
  <div class="main_body">
     <div class="main_box">
         <div class="main_nav">
-            <ul>
-                <li style="background-color: #80bd01"><a href="#" style="color: #fff">全部</a></li>
-                <li><a href="#">精华</a></li>
-                <li><a href="#">分享</a></li>
-                <li><a href="#">问答</a></li>
-                <li><a href="#">招聘</a></li>
+            <ul v-for="(tag, index) of tagData" >
+                <li><a href="#" class="origin" @click="changetab(index)" :class="{'newcolor': index==i}">{{tag.name}}</a></li>
             </ul>
         </div>
         <div id="topic_list">
@@ -16,9 +12,9 @@
                 <span class="reply_box fl">
 	                <span class="reply_count" >{{item.reply_count}}</span><span>/</span><span class="visit_count" >{{item.visit_count}}</span>
 	                <span id="topic_top"v-if="item.top">置顶</span><span id="topic_good" v-if="item.good">精华</span>
-	                <span class="topic_normal" v-if="item.tab==='share'&&item.top===false&&item.good===false">分享</span>
-	                <span class="topic_normal" v-if="item.tab==='ask'&&item.top===false&&item.good===false">问答</span>
-	                <span class="topic_normal" v-if="item.tab==='job'&&item.top===false&&item.good===false">招聘</span>
+	                <span class="topic_normal" v-if="item.tab==='share'&&!item.top&&!item.good">分享</span>
+	                <span class="topic_normal" v-if="item.tab==='ask'&&!item.top&&!item.good">问答</span>
+	                <span class="topic_normal" v-if="item.tab==='job'&&!item.top&&!item.good">招聘</span>
                 </span>
                 <div class="topic_title_box">
 
@@ -29,7 +25,15 @@
                 </div>
             </div>
         </div>
-        <div id="main_page">
+        <div class="main_page">
+            <ul>
+                <li class="pageAarowL">《</li>
+                <li class="pageOmitN">...</li>
+                <li class="pageBox" v-for="(num,index) of pageData"><a @click="changepage(index)">{{num.page}}</a></li>
+                <li class="pageOmit">...</li>
+                <li class="pageAarowR">》</li>
+                
+            </ul>
         </div>
     </div>
 </div>
@@ -39,10 +43,30 @@
 export default {
 	data () {
 		return {
+            tagData : [
+               {name: '全部', api: 'all'},
+               {name : '精华', api: 'good'},
+               {name : '分享', api: 'share'},
+               {name: '问答', api: 'ask'},
+               {name: '招聘', api: 'job'},
+            ],
+            tagDataIndex:0,
+            pageData : [
+               {page:1, api:1},
+               {page:2, api:2},
+               {page:3, api:3},
+               {page:4, api:4},
+               {page:5, api:5},
+               {page:6, api:6},
+               {page:7, api:7},
+               {page:8, api:8},
+               {page:9, api:9}
+            ],
+            pageDataIndex: 0,
 			listData : []
-		}
+        }    	
 	},
-	filters : {
+	filters: {
 		timediff: function(value){
 			
             var diff;
@@ -77,13 +101,41 @@ export default {
 	},
     created() {
             // GET /someUrl
+            
             this.$http.get('https://cnodejs.org/api/v1/topics').then((json) => {
                 this.listData=json.data.data
+                
             }, (json) => {
                 // error callback
                 console.log(json.data)
             })
+    },
+    methods: {
+            changetab : function(index) {
+                this.tagDataIndex=index
+                  
+                // var api=this.tagData[this.tagDataIndex].api
+                this.$http.get('https://cnodejs.org/api/v1/topics'+'?tab='+this.tagData[this.tagDataIndex].api).then((json) => {
+                    this.listData=json.data.data
+                    
+                }, (json) => {
+                    console.log(json.data)
+                    })
+           },
+            changepage: function(index) {
+                this.pageDataIndex=index
+                // var tab= this.tagData[this.tagDataIndex].api
+                // var page=this.pageData[index].api
+                
+                this.$http.get('https://cnodejs.org/api/v1/topics'+'?tab='+this.tagData[this.tagDataIndex].api+'&page='+this.pageData[index].api).then((json) => {
+                    this.listData=json.data.data
+                    
+                }, (json) => {
+                    console.log(json.data)
+                    })
+            }
         }
+    
 
 }
 </script>
@@ -92,11 +144,12 @@ export default {
 .fl{float: left;}
 .fr{float: right;}
 .main_body {
-    width: 1400px;
+    width: 1105px;
     min-height: 400px;
     max-height: 2000px;
     margin: 0 auto;
     margin-top: 20px;
+    margin-left: 260px;
 }
 
 .main_box {
@@ -114,11 +167,23 @@ export default {
     border-radius: 5px;
 }
 
-.main_nav ul li a {
+.origin {
     color: #80db01;
     font-size: 14px;
 }
+.origin:hover {
+    color: #005580;
+}
 
+.newcolor {
+    background-color: #80db01;
+    color: #fff;
+    padding: 2px 3px;
+    border-radius: 4px;
+}
+.newcolor:hover {
+    color: #fff;
+}
 .cell {
     clear: both;
     font-size: 14px;
@@ -192,5 +257,43 @@ export default {
     top: 12px;
     font-family: "mircosoft yahei";
     color: #ccc;
+}
+.main_page {
+    clear: both;
+    width: 1095px;
+    background-color: #fff;
+    height: 40px;
+}
+.main_page ul{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.main_page ul li {
+    float: left;
+}
+.main_page ul li:hover{
+    background-color: #f5f5f5;
+}
+.pageAarowL,.pageBox,.pageAarowR,.pageOmitN,.pageOmit {
+    border: 1px solid #ccc;
+    color: #ccc;
+}
+.pageAarowL,.pageBox a,.pageAarowR {
+    color: #778087;
+}
+.pageOmitN,.pageOmit,.pageBox,.pageAarowR{
+    border-left: none;
+}
+.pageAarowL,.pageAarowR,.pageOmitN,.pageOmit {
+    padding: 3px;
+}
+.pageBox{
+    padding: 3px 10px;
+}
+.pageAarowL{
+    border-radius: 5px 0 0 5px;
+}
+.pageAarowR{
+    border-radius: 0 5px 5px 0;
 }
 </style>
