@@ -1,8 +1,11 @@
 <template>
   <div>
     <top></top>
+    <div class="middle">
     <list></list>
-
+    <sidebar></sidebar>
+    </div>
+    <bottom></bottom>
   </div>
 </template>
 
@@ -10,19 +13,22 @@
 
 import top from './components/top.vue'
 import list from './components/list.vue'
-import footer from './components/footer.vue'
+import bottom from './components/bottom.vue'
 import sidebar from './components/sidebar.vue'
 export default {
   components: {
     top,
-    list
+    list,
+    sidebar,
+    bottom
   }
 }
 </script>
 
 <style>
 html {
-  height: 100%;
+  height: auto;
+  
 }
 *{
   margin: 0; 
@@ -31,11 +37,19 @@ html {
   list-style: none;
 }
 body {
-  display: flex;
+  display: block;
   /*justify-content: center;*/
   height: 100%;
   width: 100%;
   background-color: #ccc;
+}
+.middle{
+  clear: both;
+  width: 1400px;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+  position: relative;
 }
 
 /*#app {

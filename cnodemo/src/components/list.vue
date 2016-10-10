@@ -2,12 +2,12 @@
  <div class="main_body">
     <div class="main_box">
         <div class="main_nav">
-            <ul v-for="(tag, index) of tagData" >
-                <li><a href="#" class="origin" @click="changetab(index)" :class="{'newcolor': index==i}">{{tag.name}}</a></li>
+            <ul v-for="(tag, index) in tagData" >
+                <li><a href="#" class="origin" @click="changetab(index)" :class="{'newcolor': index==tagDataIndex}">{{tag.name}}</a></li>
             </ul>
         </div>
         <div id="topic_list">
-            <div class="cell" v-for="item of listData">
+            <div class="cell" v-for="item in listData">
 				<a href="#" class="author_avatar fl"><img :src="item.author.avatar_url"></a>
                 <span class="reply_box fl">
 	                <span class="reply_count" >{{item.reply_count}}</span><span>/</span><span class="visit_count" >{{item.visit_count}}</span>
@@ -27,11 +27,12 @@
         </div>
         <div class="main_page">
             <ul>
-                <li class="pageAarowL">《</li>
+                <li><a href="#"  class="pageAarowL" @click="pageprev">«</a></li>
                 <li class="pageOmitN">...</li>
-                <li class="pageBox" v-for="(num,index) of pageData"><a @click="changepage(index)">{{num.page}}</a></li>
+                <li v-for="(num,index) in pageDataLimit"><a class="pageBox" href="#" @click="changepage(index)" 
+                    :class="{'newNum': index==pageDataIndex}">{{num.page}}</a></li>
                 <li class="pageOmit">...</li>
-                <li class="pageAarowR">》</li>
+                <li><a href="#" class="pageAarowR" @click="pagenext">»</a></li>
                 
             </ul>
         </div>
@@ -52,18 +53,26 @@ export default {
             ],
             tagDataIndex:0,
             pageData : [
-               {page:1, api:1},
-               {page:2, api:2},
-               {page:3, api:3},
-               {page:4, api:4},
-               {page:5, api:5},
-               {page:6, api:6},
-               {page:7, api:7},
-               {page:8, api:8},
-               {page:9, api:9}
+               {page:'一', api:1},
+               {page:'二', api:2},
+               {page:'三', api:3},
+               {page:'四', api:4},
+               {page:'五', api:5},
+               {page:'六', api:6},
+               {page:'七', api:7},
+               {page:'八', api:8},
+               {page:'九', api:9},
+               {page:'十', api:10},
+               {page:'十一', api:11},
+               {page:'十二', api:12},
+               {page:'十三', api:13},
             ],
             pageDataIndex: 0,
-			listData : []
+            minus: 0,
+            plus: 0,
+            topnum: 0,
+            endnum: 0,
+            listData : []
         }    	
 	},
 	filters: {
@@ -96,9 +105,7 @@ export default {
                 return "十几秒前"
             };
 		}
-       
-       	   
-	},
+    },
     created() {
             // GET /someUrl
             
@@ -111,30 +118,80 @@ export default {
             })
     },
     methods: {
-            changetab : function(index) {
-                this.tagDataIndex=index
-                  
-                // var api=this.tagData[this.tagDataIndex].api
-                this.$http.get('https://cnodejs.org/api/v1/topics'+'?tab='+this.tagData[this.tagDataIndex].api).then((json) => {
-                    this.listData=json.data.data
-                    
-                }, (json) => {
-                    console.log(json.data)
-                    })
-           },
-            changepage: function(index) {
-                this.pageDataIndex=index
-                // var tab= this.tagData[this.tagDataIndex].api
-                // var page=this.pageData[index].api
+        changetab : function(index) {
+            this.tagDataIndex=index
+              
+            // var api=this.tagData[this.tagDataIndex].api
+            this.$http.get('https://cnodejs.org/api/v1/topics'+'?tab='+this.tagData[this.tagDataIndex].api).then((json) => {
+                this.listData=json.data.data
                 
-                this.$http.get('https://cnodejs.org/api/v1/topics'+'?tab='+this.tagData[this.tagDataIndex].api+'&page='+this.pageData[index].api).then((json) => {
-                    this.listData=json.data.data
-                    
-                }, (json) => {
-                    console.log(json.data)
-                    })
-            }
+            }, (json) => {
+                console.log(json.data)
+                })
+       },
+        changepage: function(index) {
+            this.pageDataIndex=index
+            this.$http.get('https://cnodejs.org/api/v1/topics'+'?tab='+this.tagData[this.tagDataIndex].api+'&page='+this.pageData[this.pageDataIndex].api).then((json) => {
+                this.listData=json.data.data
+                
+            }, (json) => {
+                console.log(json.data)
+                })
+            console.log(this.pageDataIndex)
+        },
+        pagenext: function() {
+            this.pageDataIndex++
+            this.plus=this.pageDataIndex
+            if (this.plus<this.pageData.length) {
+                this.$http.get('https://cnodejs.org/api/v1/topics'+'?tab='+this.tagData[this.tagDataIndex].api+'&page='+this.pageData[this.plus].api).then((json) => {
+                this.listData=json.data.data
+                
+            }, (json) => {
+                console.log(json.data)
+                })
+            } 
+            else{
+                this.plus=this.pageDataIndex=this.pageData.length-1
+                this.$http.get('https://cnodejs.org/api/v1/topics'+'?tab='+this.tagData[this.tagDataIndex].api+'&page='+this.pageData[this.plus].api).then((json) => {
+                this.listData=json.data.data
+                
+            }, (json) => {
+                console.log(json.data)
+                })
+            };
+            console.log(this.pageDataIndex)
+           
+        },
+        pageprev: function() {
+            this.pageDataIndex--
+            this.minus=this.pageDataIndex
+            if (this.minus>0) {
+                this.$http.get('https://cnodejs.org/api/v1/topics'+'?tab='+this.tagData[this.tagDataIndex].api+'&page='+this.pageData[this.minus].api).then((json) => {
+                this.listData=json.data.data
+                
+            }, (json) => {
+                console.log(json.data)
+                })
+            } 
+            else{
+                this.minus=this.pageDataIndex=0
+                this.$http.get('https://cnodejs.org/api/v1/topics'+'?tab='+this.tagData[this.tagDataIndex].api+'&page='+this.pageData[this.minus].api).then((json) => {
+                this.listData=json.data.data
+                
+            }, (json) => {
+                console.log(json.data)
+                })
+            };
+            console.log(this.pageDataIndex)
         }
+    },
+    computed: {
+        pageDataLimit: function () {
+            
+                return this.pageData.slice(0,5)
+                        
+        }
+    }
     
 
 }
@@ -145,18 +202,17 @@ export default {
 .fr{float: right;}
 .main_body {
     width: 1105px;
-    min-height: 400px;
-    max-height: 2000px;
-    margin: 0 auto;
-    margin-top: 20px;
-    margin-left: 260px;
-}
+    height: auto;
+    
+}    
 
 .main_box {
     width: 1095px;
     min-height: 400px;
     padding: 5px;
     background-color: #fff;
+    border-radius: 5px;
+
 }
 
 .main_nav ul li {
@@ -277,15 +333,19 @@ export default {
 .pageAarowL,.pageBox,.pageAarowR,.pageOmitN,.pageOmit {
     border: 1px solid #ccc;
     color: #ccc;
+    display: inline-block;
 }
-.pageAarowL,.pageBox a,.pageAarowR {
+.pageAarowL,.pageBox,.pageAarowR {
     color: #778087;
 }
 .pageOmitN,.pageOmit,.pageBox,.pageAarowR{
     border-left: none;
 }
-.pageAarowL,.pageAarowR,.pageOmitN,.pageOmit {
+.pageOmitN,.pageOmit {
     padding: 3px;
+}
+.pageAarowL,.pageAarowR{
+    padding: 3px 10px;
 }
 .pageBox{
     padding: 3px 10px;
@@ -295,5 +355,12 @@ export default {
 }
 .pageAarowR{
     border-radius: 0 5px 5px 0;
+}
+.newNum{
+    color: #d92000;
+}
+.newNum:hover{
+    color: #778087;
+    background-color: #fff;
 }
 </style>
