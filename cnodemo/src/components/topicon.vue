@@ -1,0 +1,156 @@
+<template>
+<div class="main_body">
+	<div class="main_box">
+		<div class="main_title">
+			<span v-if="contentData.top">置顶</span>
+			<span v-if="contentData.good">精华</span>
+			<h1>{{contentData.title}}</h1>
+			<div class="title_note">
+				<span>发布于 {{contentData.create_at|timediff}}</span>
+				<!-- <span>作者 {{contentData.author.loginname}}</span> -->
+				<span>{{contentData.visit_count}} 次浏览</span>
+				<span>最后一次编辑是</span>
+				<span>来自 <span v-if="contentData.tab=='share'">分享</span>
+					     <span v-if="contentData.tab=='ask'">问答</span>
+					     <span v-if="contentData.tab=='job'">招聘</span>
+			    </span>
+			</div>
+		</div>
+		<div class="topictext">
+			{{contentData.content}}
+		</div>
+        <div class="replies">
+        	<div class="topblank">
+        		<p>{{contentData.reply_count}} 回复</p>
+        	</div>
+        	<div class="reply_li" v-for="(rp,index) of contentData.replies">
+        		<img :src="rp.author.avatar_url">
+                <div class="author_info">
+                	<p>{{rp.author.loginname}}</p>
+                </div>
+        	</div>
+        </div>
+	</div>
+</div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      contentData: []
+    }
+  },
+  created() {
+  	this.$http.get('https://cnodejs.org/api/v1/topic/57ea257b3670ca3f44c5beb6').then((json) => {
+                this.contentData=json.data.data
+                console.log()
+            }, (json) => {
+                // error callback
+                console.log(json.data)
+            })
+  },
+  filters: {
+		timediff: function(value){
+			
+            var diff;
+            var curtime=Date.parse(new Date());
+            diff=curtime-Date.parse(value)
+            if (diff>31536000000) {
+                diff=parseInt(diff/31536000000)
+                return diff+" 年前"
+            } 
+            else if(diff>2592000000){
+            	diff=parseInt(diff/2592000000)
+                return diff+" 月前"
+            }
+            else if(diff>86400000){
+            	diff=parseInt(diff/86400000)
+                return diff+" 天前"
+            }
+            else if(diff>3600000){
+            	diff=parseInt(diff/3600000)
+                return diff+" 小时前"
+            }
+            else if(diff>60000){
+            	diff=parseInt(diff/60000)
+                return diff+" 分钟前"
+            }
+            else{
+                return "十几秒前"
+            };
+		}
+    }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.main_body {
+    width: 1105px;
+    height: auto;
+    
+}
+.main_title {
+	padding: 10px;
+    border-radius: 2px 2px 0 0;
+    background-color: #fff;
+    margin-bottom: 1px;
+}
+.main_title>span {
+    float: left;
+    font-size: 12px;
+    display: inline-block;
+    padding: 2px;
+    background-color: #80db01;
+    border-radius: 3px;
+    color: #fff;
+}
+.main_title h1{
+	font-size: 18px;
+	margin-left: 40px;
+}
+.title_note {
+	font-size: 13px;
+	padding: 15px 0 0 5px;
+	color: #ccc; 
+}
+.title_note>span:before {
+    content: "•";
+}
+.topictext {
+	background-color: #fff;
+	padding: 10px;
+	border-radius: 0 0 3px 3px;
+}
+.replies {
+	margin-top: 10px;
+}
+.topblank {
+    padding: 10px;
+    background-color: #f6f6f6;
+    margin-bottom: 1px;
+}
+.topblank p{
+	font-size: 14px;
+}
+.reply_li {
+	padding:10px;
+	background-color: #fff;
+	margin-bottom: 1px;
+}
+.reply_li img {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    vertical-align: center;
+    position: absolute;
+}
+.author_info {
+	padding-right: 10px;
+	margin-left: 40px;
+}
+.author_info p{
+    font-size: 12px;
+}
+</style>

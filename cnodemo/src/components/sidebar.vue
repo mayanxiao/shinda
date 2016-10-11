@@ -39,6 +39,7 @@
     	<a href="https://github.com/soliury/noder-react-native" target="_blank">客户端源码地址</a>
         </div>
     </div>
+   
   </div>
 </template>
 
@@ -183,5 +184,10 @@ export default {
 }
 .QRcode_con a:hover{
 	text-decoration: underline;
+}
+.test {
+  padding: 10px;
+  background-color: #fff;
+  margin-top: 20px;
 }
 </style>

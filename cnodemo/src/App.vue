@@ -2,8 +2,10 @@
   <div>
     <top></top>
     <div class="middle">
-    <list></list>
+    <!-- <list></list> -->
+    <topicon></topicon>
     <sidebar></sidebar>
+    <!-- <topictext></topictext> -->
     </div>
     <bottom></bottom>
   </div>
@@ -15,12 +17,16 @@ import top from './components/top.vue'
 import list from './components/list.vue'
 import bottom from './components/bottom.vue'
 import sidebar from './components/sidebar.vue'
+import topictext from './components/topictext.vue'
+import topicon from './components/topicon.vue'
 export default {
   components: {
     top,
     list,
     sidebar,
-    bottom
+    bottom,
+    topictext,
+    topicon
   }
 }
 </script>
