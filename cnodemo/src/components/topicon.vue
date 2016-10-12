@@ -11,13 +11,13 @@
 				<span>{{contentData.visit_count}} 次浏览</span>
 				<span>最后一次编辑是</span>
 				<span>来自 <span v-if="contentData.tab=='share'">分享</span>
-					     <span v-if="contentData.tab=='ask'">问答</span>
-					     <span v-if="contentData.tab=='job'">招聘</span>
+					       <span v-if="contentData.tab=='ask'">问答</span>
+					       <span v-if="contentData.tab=='job'">招聘</span>
 			    </span>
 			</div>
 		</div>
-		<div class="topictext">
-			{{contentData.content}}
+		<div class="topictext" v-html="contentData.content">
+			
 		</div>
         <div class="replies">
         	<div class="topblank">
@@ -26,7 +26,10 @@
         	<div class="reply_li" v-for="(rp,index) of contentData.replies">
         		<img :src="rp.author.avatar_url">
                 <div class="author_info">
-                	<p>{{rp.author.loginname}}</p>
+                	<p>{{rp.author.loginname}} <span>{{index+1}}楼</span><span class="infotime">{{rp.create_at|timediff}}</span></p>
+                </div>
+                <div class="replycon" v-html="rp.content">
+                                     
                 </div>
         	</div>
         </div>
@@ -79,7 +82,10 @@ export default {
             else{
                 return "十几秒前"
             };
-		}
+		},
+        // conhtml: function(value) {
+        //     return parse(value)
+        // }
     }
 }
 </script>
@@ -122,6 +128,7 @@ export default {
 	background-color: #fff;
 	padding: 10px;
 	border-radius: 0 0 3px 3px;
+    overflow: hidden;
 }
 .replies {
 	margin-top: 10px;
@@ -150,7 +157,20 @@ export default {
 	padding-right: 10px;
 	margin-left: 40px;
 }
-.author_info p{
+.author_info p {
     font-size: 12px;
+}
+.author_info p span {
+    color: #08c;
+}
+.infotime:before {
+    content: "•"
+}
+.replycon {
+    margin-left: 40px;
+}
+.markdown-text img{
+    width: 1085px;
+    height: auto;
 }
 </style>

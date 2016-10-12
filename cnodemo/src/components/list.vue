@@ -11,14 +11,14 @@
 				<a href="#" class="author_avatar fl"><img :src="item.author.avatar_url"></a>
                 <span class="reply_box fl">
 	                <span class="reply_count" >{{item.reply_count}}</span><span>/</span><span class="visit_count" >{{item.visit_count}}</span>
-	                <span id="topic_top"v-if="item.top">置顶</span><span id="topic_good" v-if="item.good">精华</span>
-	                <span class="topic_normal" v-if="item.tab==='share'&&!item.top&&!item.good">分享</span>
+	                <span id="topic_top"v-if="item.top">置顶</span><span id="topic_good" v-else v-if="item.good">精华</span>
+	                <span class="topic_normal" v-else v-if="item.tab==='share'&&!item.top&&!item.good">分享</span>
 	                <span class="topic_normal" v-if="item.tab==='ask'&&!item.top&&!item.good">问答</span>
 	                <span class="topic_normal" v-if="item.tab==='job'&&!item.top&&!item.good">招聘</span>
                 </span>
                 <div class="topic_title_box">
 
-                    <a href="#" class="topic_title">{{item.title}}</a>
+                    <router-link to="/topic/57ea257b3670ca3f44c5beb6">{{item.title}}</router-link>
                 </div>
                 <div class="last_reply fr">
                     <span class="last_reply_time">{{item.last_reply_at|timediff}}</span>
@@ -36,13 +36,14 @@
                 
             </ul>
         </div>
+        <router-view></router-view>
     </div>
 </div>
 
 </template>
 <script>
 export default {
-	data () {
+    data () {
 		return {
             tagData : [
                {name: '全部', api: 'all'},
@@ -75,6 +76,7 @@ export default {
             listData : []
         }    	
 	},
+    
 	filters: {
 		timediff: function(value){
 			
@@ -191,7 +193,8 @@ export default {
                 return this.pageData.slice(0,5)
                         
         }
-    }
+    },
+    watch: {}
     
 
 }
@@ -203,7 +206,6 @@ export default {
 .main_body {
     width: 1105px;
     height: auto;
-    
 }    
 
 .main_box {

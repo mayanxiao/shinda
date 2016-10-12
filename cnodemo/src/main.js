@@ -9,17 +9,17 @@ Vue.use(VueRouter);
 
 /* eslint-disable no-new */
 const Foo = { template: '<div>bar</div>' }
-const Nima = { template: '<div>nima</div>'}
+import topicon from 'components/topicon.vue'
 const routes = [
      { path: '/foo', component: Foo },
-     { path: '/nima', component: Nima}
+     { path: '/topic/57ea257b3670ca3f44c5beb6', component: topicon}
 ]
 const router = new VueRouter({
   routes 
 })
 
-new Vue({
+const app = new Vue({
   el: '#app',
   router,
   render: h => h(App)
-})
+}).$mount('#app')

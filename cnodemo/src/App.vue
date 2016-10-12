@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div id="app">
     <top></top>
     <div class="middle">
-    <!-- <list></list> -->
-    <topicon></topicon>
+    <list></list>
+    <!-- <topicon></topicon> -->
     <sidebar></sidebar>
     <!-- <topictext></topictext> -->
     </div>
