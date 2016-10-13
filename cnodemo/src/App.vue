@@ -2,9 +2,9 @@
   <div id="app">
     <top></top>
     <div class="middle">
-    <list></list>
-    <!-- <topicon></topicon> -->
+    <router-view></router-view>
     <sidebar></sidebar>
+    <!-- <router-view name="right"></router-view> -->
     <!-- <topictext></topictext> -->
     </div>
     <bottom></bottom>
@@ -12,13 +12,13 @@
 </template>
 
 <script>
-
 import top from './components/top.vue'
 import list from './components/list.vue'
 import bottom from './components/bottom.vue'
 import sidebar from './components/sidebar.vue'
 import topictext from './components/topictext.vue'
 import topicon from './components/topicon.vue'
+import anotherside from 'components/anotherside.vue'
 export default {
   components: {
     top,
@@ -26,7 +26,8 @@ export default {
     sidebar,
     bottom,
     topictext,
-    topicon
+    topicon,
+    anotherside
   }
 }
 </script>

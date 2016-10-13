@@ -3,7 +3,7 @@
 	<div class="main_box">
 		<div class="main_title">
 			<span v-if="contentData.top">置顶</span>
-			<span v-if="contentData.good">精华</span>
+			<span v-if="contentData.good&&!contentData.top">精华</span>
 			<h1>{{contentData.title}}</h1>
 			<div class="title_note">
 				<span>发布于 {{contentData.create_at|timediff}}</span>
@@ -45,7 +45,7 @@ export default {
     }
   },
   created() {
-  	this.$http.get('https://cnodejs.org/api/v1/topic/57ea257b3670ca3f44c5beb6').then((json) => {
+  	this.$http.get('https://cnodejs.org/api/v1/topic/'+this.$route.params.id).then((json) => {
                 this.contentData=json.data.data
                 console.log()
             }, (json) => {

@@ -1,10 +1,10 @@
 <template>
   <div class="nav_bar">
 		<div class="nav_inner">
-			<div class="logo_bar"><img src="../assets/cnodejs_light.svg"></div>
+			<div class="logo_bar"><router-link to="/"><img src="../assets/cnodejs_light.svg"></router-link></div>
 			<div class="nav_search"><input type="text" class="search_box"></div>
 			<ul class="nav_con">
-				<li><a href="">{{ msg_a }}</a></li>
+				<li><router-link to="/">{{ msg_a }}</router-link></li>
 				<li><a href="">{{ msg_b }}</a></li>
 				<li><a href="">{{ msg_c }}</a></li>
 				<li><a href="">{{ msg_d }}</a></li>

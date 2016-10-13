@@ -8,18 +8,39 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 /* eslint-disable no-new */
-const Foo = { template: '<div>bar</div>' }
-import topicon from 'components/topicon.vue'
-const routes = [
-     { path: '/foo', component: Foo },
-     { path: '/topic/57ea257b3670ca3f44c5beb6', component: topicon}
-]
+
+import top from './components/top.vue'
+import list from './components/list.vue'
+import bottom from './components/bottom.vue'
+import sidebar from './components/sidebar.vue'
+import topictext from './components/topictext.vue'
+import topicon from './components/topicon.vue'
+import anotherside from 'components/anotherside.vue'
+// const user = { template: '<div>{{ $route.params.id }}</div>'}
 const router = new VueRouter({
-  routes 
+	mode: 'history',
+    base: __dirname,
+    routes: [
+	    {
+			path: '/',
+			components: {
+				default: list,
+				right: sidebar
+			}
+	    },
+	    {
+			path: '/topics/:id', 
+			name: 'topic',
+			component: topicon
+				
+			
+		}
+    ]
 })
 
-const app = new Vue({
+new Vue({
   el: '#app',
   router,
   render: h => h(App)
-}).$mount('#app')
+})
+

@@ -11,14 +11,15 @@
 				<a href="#" class="author_avatar fl"><img :src="item.author.avatar_url"></a>
                 <span class="reply_box fl">
 	                <span class="reply_count" >{{item.reply_count}}</span><span>/</span><span class="visit_count" >{{item.visit_count}}</span>
-	                <span id="topic_top"v-if="item.top">置顶</span><span id="topic_good" v-else v-if="item.good">精华</span>
+	                <span id="topic_top"v-if="item.top">置顶</span><span id="topic_good" v-if="item.good&&!item.top">精华</span>
 	                <span class="topic_normal" v-else v-if="item.tab==='share'&&!item.top&&!item.good">分享</span>
 	                <span class="topic_normal" v-if="item.tab==='ask'&&!item.top&&!item.good">问答</span>
 	                <span class="topic_normal" v-if="item.tab==='job'&&!item.top&&!item.good">招聘</span>
                 </span>
                 <div class="topic_title_box">
 
-                    <router-link to="/topic/57ea257b3670ca3f44c5beb6">{{item.title}}</router-link>
+                    <router-link :to="{name:'topic', params:{id: item.id}}">{{item.title}}</router-link>
+                    <!--  to= "{ path: '/users', query: { foo: 'bar' }}" -->
                 </div>
                 <div class="last_reply fr">
                     <span class="last_reply_time">{{item.last_reply_at|timediff}}</span>
@@ -113,7 +114,7 @@ export default {
             
             this.$http.get('https://cnodejs.org/api/v1/topics').then((json) => {
                 this.listData=json.data.data
-                
+
             }, (json) => {
                 // error callback
                 console.log(json.data)
@@ -126,7 +127,7 @@ export default {
             // var api=this.tagData[this.tagDataIndex].api
             this.$http.get('https://cnodejs.org/api/v1/topics'+'?tab='+this.tagData[this.tagDataIndex].api).then((json) => {
                 this.listData=json.data.data
-                
+                                
             }, (json) => {
                 console.log(json.data)
                 })
@@ -364,5 +365,9 @@ export default {
 .newNum:hover{
     color: #778087;
     background-color: #fff;
+}
+
+.router-link-active {
+  color: red;
 }
 </style>
