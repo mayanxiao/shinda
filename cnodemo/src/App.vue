@@ -3,8 +3,8 @@
     <top></top>
     <div class="middle">
     <router-view></router-view>
-    <sidebar></sidebar>
-    <!-- <router-view name="right"></router-view> -->
+    <!-- <sidebar></sidebar> -->
+    <router-view name="right"></router-view>
     <!-- <topictext></topictext> -->
     </div>
     <bottom></bottom>
@@ -19,6 +19,7 @@ import sidebar from './components/sidebar.vue'
 import topictext from './components/topictext.vue'
 import topicon from './components/topicon.vue'
 import anotherside from 'components/anotherside.vue'
+import signup from 'components/signup.vue'
 export default {
   components: {
     top,
@@ -27,7 +28,8 @@ export default {
     bottom,
     topictext,
     topicon,
-    anotherside
+    anotherside,
+    signup
   }
 }
 </script>
