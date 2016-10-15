@@ -273,7 +273,7 @@ export default {
 }
 #topic_list{clear: both;}
 
-.topic_title {
+.topic_title_box a {
     font-size: 16px;
     color: #000;
     display: inline-block;
@@ -282,7 +282,7 @@ export default {
     overflow: hidden;
 }
 
-.topic_title:hover {
+.topic_title_box a:hover {
     text-decoration: underline;
 }
 
@@ -367,7 +367,4 @@ export default {
     background-color: #fff;
 }
 
-.router-link-active {
-  color: red;
-}
 </style>

@@ -15,8 +15,9 @@ import bottom from './components/bottom.vue'
 import sidebar from './components/sidebar.vue'
 import topictext from './components/topictext.vue'
 import topicon from './components/topicon.vue'
-import anotherside from 'components/anotherside.vue'
 import signup from 'components/signup.vue'
+import signin from 'components/signin.vue'
+
 // const user = { template: '<div>{{ $route.params.id }}</div>'}
 const router = new VueRouter({
 	mode: 'history',
@@ -38,6 +39,11 @@ const router = new VueRouter({
 			path: '/signup',
 			name: 'signup',
 			component: signup
+		},
+		{
+			path: '/signin',
+			name: 'signin',
+			component: signin
 		}
     ]
 })

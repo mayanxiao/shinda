@@ -2,18 +2,16 @@
   <div class="sign_body">
     <div class="signleft">
        <div class="signtitle">
-         <p><router-link to='/'>首页</router-link> /注册</p>
+         <p><router-link to='/'>首页</router-link> /登陆</p>
        </div>
        <div class="signcon">
          <ul>
-           <li>用户名<input type="text" class="signbox" :value="username" @input="updatename" ></li>
-           <li>密码<input type="password" class="signbox" :value="password" @input="updatepswd"></li>
-           <li>确认密码<input type="password" class="signbox" :value="passwordcfm" @input="updatecfm"></li>
-           <li>电子邮箱<input type="text" class="signbox" :value="email" @input="updateemail"></li>
+           <li>用户名<input type="text" class="signbox" v-model="userData.name"></li>
+           <li>密码<input type="password" class="signbox" v-model="userData.password"></li>
          </ul>
          <p class="btnbox">
-            <span class="signupbtn"  @click="datapost">注册</span>
-            <span class="signupbtn" @click="">通过 Git Hub 登录</span></p>
+            <span class="signbtn"  @click="">登陆</span>
+            <span class="signbtn" @click="">通过 Git Hub 登录</span></p>
        </div>
     </div>
     <div class="signright">
@@ -27,10 +25,7 @@
            <li>分享自己的知识</li>
            <li>和其它人一起进步</li>
          </ul>
-         <div style="margin-top:20px">{{username}}</div>
-         <div>{{password}}</div>
-         <div>{{passwordcfm}}</div>
-         <div>{{email}}</div>
+         
        </div>
     </div>
   </div>
@@ -40,51 +35,9 @@
 export default {
   data () {
     return {
-     recordData: [],
-     username: '',
-     password: '',
-     passwordcfm: '',
-     email: ''
-    }
-  },
-  methods: {
-    datapost: function(){
-        // console.log(this.recordData)
-        
-        // // POST /someUrl
-        // this.$http.post('/userlist', this.recordData).then((response) => {
-
-        //   // get status
-        //   response.status;
-
-        //   // get status text
-        //   response.statusText;
-
-        //   // get 'Expires' header
-        //   response.headers.get('Expires');
-
-        //   // set data on vm
-        //   this.$set('userData', response.body);
-
-        // }, (response) => {
-        //   // error callback
-        // });
-        
-    },
-    updatename: function (e) {
-      this.recordData.username=this.username = e.target.value
-    },
-    updatepswd: function(e) {
-      this.recordData.password=this.password = e.target.value
-    },
-    updatecfm: function(e) {
-      this.recordData.passwordcfm=this.passwordcfm = e.target.value
-    },
-    updateemail: function(e) {
-      this.recordData.email=this.email = e.target.value
+      userData:[]
     }
   }
-  
 }
 </script>
 
@@ -99,8 +52,8 @@ export default {
   padding-bottom: 685px;
 }
 .signleft {
-	float: left;
-	width: 1075px;
+  float: left;
+  width: 1075px;
   height: auto;
   padding: 10px;
   background-color: #fff;
@@ -153,7 +106,7 @@ export default {
 .btnbox {
   margin-left: 251px;
 }
-.signupbtn{
+.signbtn{
   display: inline-block;
   margin-top: 30px;
   margin-left: 20px;
@@ -168,7 +121,6 @@ export default {
   font-size: 14px;
 }
 .rightcon li {
-
   list-style: disc;
   margin-left: 25px;
   font-size: 13px;

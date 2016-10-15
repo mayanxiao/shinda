@@ -16,7 +16,7 @@
 			    </span>
 			</div>
 		</div>
-		<div class="topictext" v-html="contentData.content">
+		<div class="topictext markdown-body" v-html="contentData.content">
 			
 		</div>
         <div class="replies">
@@ -28,7 +28,7 @@
                 <div class="author_info">
                 	<p>{{rp.author.loginname}} <span>{{index+1}}楼</span><span class="infotime">{{rp.create_at|timediff}}</span></p>
                 </div>
-                <div class="replycon" v-html="rp.content">
+                <div class="replycon markdown-body" v-html="rp.content">
                                      
                 </div>
         	</div>
@@ -91,7 +91,9 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
+@import '../markdownbody/github-markdown.css';
 .main_body {
     width: 1105px;
     height: auto;
@@ -169,8 +171,31 @@ export default {
 .replycon {
     margin-left: 40px;
 }
-.markdown-text img{
-    width: 1085px;
-    height: auto;
+/*.markdown-text p {
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    line-height: 2em;
+    margin: 1em 0;
 }
+.markdown-text>:last-child {
+    margin-bottom: 1em;
+}
+.markdown-text>:first-child {
+    margin-top: 0;
+}
+.markdown-text li {
+    font-size: 14px;
+    line-height: 2em;
+}
+.markdown-text li code,.markdown-text p code {
+    color: #000;
+    background-color: #fcfafa;
+    padding: 4px 6px; 
+}
+.markdown-text img {
+    cursor: pointer;
+}
+.markdown-text a {
+    color: #08c
+}*/
 </style>

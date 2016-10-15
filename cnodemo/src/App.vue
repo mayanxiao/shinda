@@ -18,8 +18,8 @@ import bottom from './components/bottom.vue'
 import sidebar from './components/sidebar.vue'
 import topictext from './components/topictext.vue'
 import topicon from './components/topicon.vue'
-import anotherside from 'components/anotherside.vue'
 import signup from 'components/signup.vue'
+import signin from 'components/signin.vue'
 export default {
   components: {
     top,
@@ -28,8 +28,8 @@ export default {
     bottom,
     topictext,
     topicon,
-    anotherside,
-    signup
+    signup,
+    signin
   }
 }
 </script>
@@ -51,6 +51,7 @@ body {
   height: 100%;
   width: 100%;
   background-color: #ccc;
+  font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti,sans-serif!important;
 }
 .middle{
   clear: both;

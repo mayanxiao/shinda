@@ -9,7 +9,7 @@
 				<li><a href="">{{ msg_c }}</a></li>
 				<li><a href="">{{ msg_d }}</a></li>
 				<li><router-link :to="{name:'signup'}">{{ msg_e }}</router-link></li>
-				<li><a href="">{{ msg_f }}</a></li>
+				<li><router-link :to="{name:'signin'}">{{ msg_f }}</router-link></li>
 			</ul>
     </div>
 	</div>
