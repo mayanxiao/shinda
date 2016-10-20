@@ -6,12 +6,11 @@
        </div>
        <div class="signcon">
          <ul>
-           <li>用户名<input type="text" class="signbox" v-model="userData.name"></li>
-           <li>密码<input type="password" class="signbox" v-model="userData.password"></li>
+           <p class="signwarn" v-if="tokenjudge">请输入正确的36位token!!!</p>
+           <li>请输入token<input type="text" class="signbox" v-model="tokeninput" maxlength="36"></li>
          </ul>
          <p class="btnbox">
-            <span class="signbtn"  @click="">登陆</span>
-            <span class="signbtn" @click="">通过 Git Hub 登录</span></p>
+            <span class="signbtn"  @click="tokenpost">登陆</span>
        </div>
     </div>
     <div class="signright">
@@ -35,25 +34,38 @@
 export default {
   data () {
     return {
-      userData:[]
+      tokeninput: '',
+      tokenjudge: false
+    }
+  },
+  methods: {
+    tokenpost() {
+      console.log(this.tokeninput)
+      if (this.tokeninput.length!==36) {
+          this.tokenjudge = true
+          return false
+      } else{
+          // this.$http.post()
+      };
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="less">
 .sign_body {
   clear: both;
 	display: block;
-	width:1400px;
+	width: 100%;
 	height: auto;
   margin: 10px auto;
   padding-bottom: 685px;
 }
 .signleft {
   float: left;
-  width: 1075px;
+  width: 77%;
   height: auto;
   padding: 10px;
   background-color: #fff;
@@ -61,7 +73,7 @@ export default {
 }
 .signright {
   float: right;
-  width: 270px;
+  width: 19%;
   height: auto;
   padding: 10px;
   background-color: #fff;
@@ -69,30 +81,33 @@ export default {
 }
 .signtitle {
   background-color: #f6f6f6;
-
-}
-.signtitle p {
-  color: #ccc;
-}
-.signtitle span {
-  font-size: 13px;
-}
-.signtitle a {
-  color: #80bd01;
-}
-.signtitle a:hover {
-  text-decoration: underline;
+  p {
+    color: #ccc;
+    font-size: 14px;
+  }
+  a {
+    color: #80bd01;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 .signcon {
   padding: 50px 0;
-}
-.signcon li {
-  text-align: right;
+  .signwarn {
+    display: inline-block;
+    padding: 10px 50px;
+    background-color: #FF8C00;
+    margin-left: 20%;
+  }
+  li {
+    text-align: right;
+  }
 }
 .signbox {
   display: inline-block;
   margin: 10px 520px 10px 20px;
-  width: 270px;
+  width: 290px;
   height: 20px;
   padding: 4px 6px;
   border: 1px solid #ccc;
@@ -100,11 +115,8 @@ export default {
   font-size: 14px;
   line-height: 20px;
 }
-.signbox:before {
-  content: "233"
-}
 .btnbox {
-  margin-left: 251px;
+  margin-left: 30%;
 }
 .signbtn{
   display: inline-block;
@@ -116,14 +128,16 @@ export default {
   border-radius: 3px;
   color: #fff;
 }
-.rightcon p {
-  margin: 10px 0;
-  font-size: 14px;
-}
-.rightcon li {
-  list-style: disc;
-  margin-left: 25px;
-  font-size: 13px;
-  margin-bottom: 5px;
+.rightcon {
+  p {
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  li {
+    list-style: disc;
+    margin-left: 25px;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
 }
 </style>

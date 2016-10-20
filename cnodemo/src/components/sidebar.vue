@@ -35,7 +35,7 @@
     <div class="QRcode">
     	<p>客户端二维码</p>
     	<div class="QRcode_con">
-    	<p><img src="../assets/qrcode.jpg" height="280" width="280"></p>
+    	<p><img src="../assets/qrcode.jpg" height="200" width="200"></p>
     	<a href="https://github.com/soliury/noder-react-native" target="_blank">客户端源码地址</a>
         </div>
     </div>
@@ -75,8 +75,10 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="less">
+@white: #fff;
 .sidebar {
+  width: 20%;
   position: absolute;
   right: 0;
   top: 0;
@@ -89,20 +91,20 @@ export default {
 .login_title{
 	font-size: 15px;
 	color: #000;
-    width: 265px;
-    margin-bottom: 10px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 .login_con{
 	font-size: 13px;
 	color: #000;
-}
-.login_con a{
-	font-size: 13px;
-	color: #005580;
-	padding: 0 2px;
-}
-.login_con a:hover{
-	text-decoration: underline;
+  a {
+     font-size: 13px;
+     color: #005580;
+     padding: 0 2px;
+     &:hover {
+      text-decoration: underline;
+     };
+  }
 }
 .loginbtn{
 	display: inline-block;
@@ -111,83 +113,76 @@ export default {
 	background-color: #5bc0de;
 	font-size: 14px;
 	border-radius: 3px;
-	color: #fff;
+	color: @white;
 }
 .sidead{
+  width: 15%;
 	margin:10px 0;
 	padding: 10px 10px 0 10px;
-	width: 265px;
-	background-color: #fff;
-}
-.sidead a img{
-	width: 265px;
-	height: 65px;
-	margin-bottom: 10px;
+	width: 93%;
+	background-color: @white;
+  img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
 }
 .no_reply {
-	background-color: #fff;
+	background-color: @white;
 	padding: 10px;
 	font-size: 13px;
 	border-radius: 3px;
+  p {
+    margin-bottom: 10px;
+  }
 }
-.no_reply p{
-	margin-bottom: 10px;
-}
-.scoreboard{
-	background-color: #fff;
+.scoreboard {
+	background-color: @white;
 	padding: 10px;
 	font-size: 13px;
 	margin:10px 0;
 	border-radius: 3px;
-}
-.scoreboard p{
-	margin-bottom: 10px;
+  p {
+    margin-bottom: 10px;
+  }
 }
 .friend {
 	padding: 10px 10px 0 10px;
-	width: 265px;
-	background-color: #fff;
-}
-.friend p{
-	font-size: 13px;
-}
-.fri_pic a img{
-	width: 150px;
-	height: 45px;
-	margin-bottom: 10px;
+	width: 93%;
+	background-color: @white;
+  p {
+    font-size: 13px;
+  }
+  img {
+    width: 145px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
 }
 .QRcode{
 	padding: 10px;
-	background-color: #fff;
+	background-color: @white;
 	margin-top: 10px;
-}
-.QRcode p{
-	font-size: 13px;
-	margin-bottom: 10px;
+  p {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
 }
 .QRcode_con {
 	padding: 10px;
 	vertical-align: middle;
-	text-align:center
-}
-.QRcode_con img{
-	display: block;
-	margin: 0 auto;
-	width: 200px;
-	height: 200px;
-}
-.QRcode_con a{
-	font-size: 13px;
+	text-align:center;
+  a {
+    font-size: 13px;
     color: #778087;
     display: inline-block;
-    margin: 0 auto;
-}
-.QRcode_con a:hover{
-	text-decoration: underline;
-}
-.test {
-  padding: 10px;
-  background-color: #fff;
-  margin-top: 20px;
+    &:hover {
+      text-decoration: underline;
+    }
+    img {
+      max-width: 90%;
+      height: auto;
+    }
+  }
 }
 </style>

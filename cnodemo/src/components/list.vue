@@ -201,68 +201,63 @@ export default {
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.fl{float: left;}
-.fr{float: right;}
+<style lang="less">
+@green: #80db01;
 .main_body {
-    width: 1105px;
+    width: 90%;
     height: auto;
 }    
-
 .main_box {
-    width: 1095px;
+    width: 85%;
     min-height: 400px;
     padding: 5px;
     background-color: #fff;
     border-radius: 5px;
-
 }
-
-.main_nav ul li {
+.main_nav {
+    width: 85%;
+    li {
     float: left;
     display: inline-block;
     padding: 5px;
     margin: 0 5px;
     border-radius: 5px;
+    }
 }
-
 .origin {
     color: #80db01;
     font-size: 14px;
+    &:hover {
+        color: #005580;
+    }
 }
-.origin:hover {
-    color: #005580;
-}
-
 .newcolor {
-    background-color: #80db01;
+    background-color: @green;
     color: #fff;
     padding: 2px 3px;
     border-radius: 4px;
-}
-.newcolor:hover {
-    color: #fff;
+    &:hover {
+        color: #fff;
+    }
 }
 .cell {
     clear: both;
     font-size: 14px;
     padding: 10px;
     position: relative;
-    width: 1075px;
+    width: 95%;
     height: 25px;
     line-height: 30px;
 }
-
 .author_avatar img {
     width: 30px;
     height: 30px;
     border-radius: 3px;
 }
-
 .reply_box {
     padding: 0 5px;
-}
 
+}
 .reply_count {
     color: #9e78c0;
     font-size: 15px;
@@ -271,21 +266,20 @@ export default {
 	color: #b4b4b4;
 	font-size: 12px;
 }
-#topic_list{clear: both;}
-
+#topic_list {
+    clear: both;
+}
 .topic_title_box a {
     font-size: 16px;
     color: #000;
     display: inline-block;
-    width: 750px;
+    width: 70%;
     height: 32px;
     overflow: hidden;
+    &:hover {
+       text-decoration: underline; 
+    }
 }
-
-.topic_title_box a:hover {
-    text-decoration: underline;
-}
-
 #topic_top,
 #topic_good {
     display: inline-block;
@@ -297,7 +291,6 @@ export default {
     padding: 2px 2px;
     border-radius: 2px;
 }
-
 .topic_normal {
     display: inline-block;
     font-size: 12px;
@@ -308,7 +301,6 @@ export default {
     padding: 2px 2px;
     border-radius: 2px;
 }
-
 .last_reply_time {
     font-size: 12px;
     position: absolute;
@@ -322,16 +314,15 @@ export default {
     width: 1095px;
     background-color: #fff;
     height: 40px;
-}
-.main_page ul{
-    margin-top: 20px;
-    margin-left: 20px;
-}
-.main_page ul li {
-    float: left;
-}
-.main_page ul li:hover{
-    background-color: #f5f5f5;
+    ul {
+        margin: 20px 0 0 20px;
+        li {
+            float: left;
+            &:hover {
+                background-color: #f5f5f5;
+            }
+        }
+    }
 }
 .pageAarowL,.pageBox,.pageAarowR,.pageOmitN,.pageOmit {
     border: 1px solid #ccc;
@@ -361,10 +352,9 @@ export default {
 }
 .newNum{
     color: #d92000;
+    &:hover {
+        color: #778087;
+        background-color: #fff;
+    }
 }
-.newNum:hover{
-    color: #778087;
-    background-color: #fff;
-}
-
 </style>

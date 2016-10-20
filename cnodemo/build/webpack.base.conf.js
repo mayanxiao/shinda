@@ -50,6 +50,14 @@ module.exports = {
         }
       },
       {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
+      },
+      // {
+      //   test:/\.css$/,
+      //   loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version"]}'
+      // },
+      {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url',
         query: {

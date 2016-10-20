@@ -9,7 +9,6 @@
 				<span>发布于 {{contentData.create_at|timediff}}</span>
 				<!-- <span>作者 {{contentData.author.loginname}}</span> -->
 				<span>{{contentData.visit_count}} 次浏览</span>
-				<span>最后一次编辑是</span>
 				<span>来自 <span v-if="contentData.tab=='share'">分享</span>
 					       <span v-if="contentData.tab=='ask'">问答</span>
 					       <span v-if="contentData.tab=='job'">招聘</span>
@@ -21,7 +20,7 @@
 		</div>
         <div class="replies">
         	<div class="topblank">
-        		<p>{{contentData.reply_count}} 回复</p>
+        		<p><i>{{contentData.reply_count}}</i> 回复</p>
         	</div>
         	<div class="reply_li" v-for="(rp,index) of contentData.replies">
         		<img :src="rp.author.avatar_url">
@@ -94,11 +93,7 @@ export default {
 
 <style scoped>
 @import '../markdownbody/github-markdown.css';
-.main_body {
-    width: 1105px;
-    height: auto;
-    
-}
+
 .main_title {
 	padding: 10px;
     border-radius: 2px 2px 0 0;
