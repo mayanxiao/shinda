@@ -1,0 +1,40 @@
+<html>
+
+	<body>
+		<pre>
+			<script type="text/javascript" >
+				document.write("<table>");
+					var table = "乘法口诀表";
+					document.write("<h1>"+table+"</h1>");
+					for (var i = 1; i < 10; i++) {
+						document.write("<tr>")
+						for (var j = 1; j <= i; j++) {
+							document.write("<th>" + i + "*" + j + "=" + (i*j) + "</th>")
+						};
+						document.write("</tr>")
+					};                 
+			</script>
+		</pre>
+	</body>
+	<style>
+    *{margin: 0; padding: 0; font-size: 16px;}
+    table {
+    width: 800px;
+    height: 300px;
+    border-collapse: collapse;
+    margin: 0 auto;
+	}
+	table th {
+	    border: 1px solid #069;
+	}
+	body {
+	    text-align: center;
+	}
+	h1 {
+	    font-family: "微软雅黑", Verdana, sans-serif, "宋体";
+	    color: #666;
+	    font-weight: bold;
+	    margin-bottom: 30px;
+	} 
+	</style>
+</html>
